@@ -19,28 +19,23 @@ if (session_status() === PHP_SESSION_NONE) {
 // Environment-aware configuration. A server-only local override may provide
 // DB_HOST, DB_NAME, DB_USER, DB_PASS, and DB_PORT without entering Git.
 $localConfig = __DIR__ . '/database.local.php';
+$localSettings = [];
 if (is_file($localConfig)) {
-    $localSettings = require $localConfig;
-    if (is_array($localSettings)) {
-        foreach (['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS', 'DB_PORT'] as $setting) {
-            if (array_key_exists($setting, $localSettings)) {
-                putenv($setting . '=' . $localSettings[$setting]);
-            }
-        }
+    $configuredSettings = require $localConfig;
+    if (is_array($configuredSettings)) {
+        $localSettings = $configuredSettings;
     }
 }
 
-// Environment-aware configuration. Local XAMPP works with the defaults below.
-// Hosted platforms can inject explicit DB_* variables, or provide Railway's
-// MySQL plugin variables (MYSQLHOST/MYSQLPORT/MYSQLUSER/MYSQLPASSWORD/
-// MYSQLDATABASE) or a connection string (MYSQL_URL / DATABASE_URL).
-$db_host = getenv('DB_HOST');
-$db_name = getenv('DB_NAME');
-$db_user = getenv('DB_USER');
-$db_pass = getenv('DB_PASS');
-$db_port = getenv('DB_PORT');
+// Prefer the server-only local file directly so shared hosts do not need
+// putenv() to be enabled.
+$db_host = $localSettings['DB_HOST'] ?? getenv('DB_HOST');
+$db_name = $localSettings['DB_NAME'] ?? getenv('DB_NAME');
+$db_user = $localSettings['DB_USER'] ?? getenv('DB_USER');
+$db_pass = $localSettings['DB_PASS'] ?? getenv('DB_PASS');
+$db_port = $localSettings['DB_PORT'] ?? getenv('DB_PORT');
 
-if ($db_host === false || $db_host === '') {
+if ($localSettings === []) {
     $db_url = getenv('MYSQL_URL') ?: getenv('DATABASE_URL');
     $parts = ($db_url && preg_match('#^mysql#i', $db_url)) ? parse_url($db_url) : false;
 
@@ -53,10 +48,10 @@ if ($db_host === false || $db_host === '') {
             $db_name = ltrim($parts['path'], '/');
         }
     } else {
-        $db_host = getenv('MYSQLHOST');
+        $db_host = getenv('MYSQLHOST') ?: $db_host;
         $db_port = getenv('MYSQLPORT') ?: $db_port;
-        $db_user = getenv('MYSQLUSER');
-        $db_pass = getenv('MYSQLPASSWORD');
+        $db_user = getenv('MYSQLUSER') ?: $db_user;
+        $db_pass = getenv('MYSQLPASSWORD') ?: $db_pass;
         $db_name = getenv('MYSQLDATABASE') ?: $db_name;
     }
 }
