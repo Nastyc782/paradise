@@ -38,9 +38,11 @@ dsclass/
 3. Import `database/digital_smart_class.sql` (phpMyAdmin → Import).
 4. Edit `config/database.php` defaults — host, database name, user, password — or
    provide `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `DB_PORT` environment variables.
-   On InfinityFree, create `config/database.local.php` on the server (this file is
-   intentionally excluded from Git) with the following structure, using your
-   private database password:
+   On InfinityFree, keep `config/database.php` exactly as supplied by the
+   repository. Do not rename or replace it. Create a second file named
+   `config/database.local.php` on the server (this file is intentionally
+   excluded from Git) with the following structure, using your private database
+   password:
 
    ```php
    <?php
