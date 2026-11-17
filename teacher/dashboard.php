@@ -1,0 +1,128 @@
+<?php
+require_once __DIR__ . '/../includes/teacher-auth.php';
+$user = current_user();
+$page_title = "TEACHER DASHBOARD — DIGITAL SMART CLASS";
+
+// Fetch instructor metrics
+$myCourses = [];
+$totalStudents = 0;
+$publishedCount = 0;
+$dashboardError = null;
+
+if ($db_connected && $pdo) {
+    try {
+        $cStmt = $pdo->prepare("
+            SELECT c.*, 
+                   (SELECT COUNT(DISTINCT e.user_id) FROM enrollments e WHERE e.course_id = c.id AND e.status = 'active') as student_count
+            FROM courses c
+            WHERE c.teacher_id = :tid
+            ORDER BY c.created_at DESC
+        ");
+        $cStmt->execute(['tid' => $user['id']]);
+        $myCourses = $cStmt->fetchAll();
+
+        foreach ($myCourses as $mc) {
+            $totalStudents += (int)$mc['student_count'];
+            if ($mc['status'] === 'published') $publishedCount++;
+        }
+    } catch (PDOException $e) {
+        log_database_error('Load teacher dashboard', $e);
+        $dashboardError = 'Course information could not be loaded. Please refresh the page.';
+    }
+}
+
+require_once __DIR__ . '/../includes/header.php';
+?>
+
+<div class="dashboard-layout">
+    <aside class="sidebar">
+        <div class="sidebar-user">
+            <div class="sidebar-user-avatar avatar-teacher"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="sidebar-user-info">
+                <h5><?= e($user['full_name']); ?></h5>
+                <span>Instructor</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active"><a href="<?= site_url('teacher/dashboard.php'); ?>"><i class="fas fa-th-large"></i> Dashboard</a></li>
+            <li class="sidebar-item"><a href="<?= site_url('teacher/courses.php'); ?>"><i class="fas fa-book"></i> My Courses</a></li>
+            <li class="sidebar-item"><a href="<?= site_url('teacher/create-course.php'); ?>"><i class="fas fa-plus-circle"></i> Create Course</a></li>
+            <li class="sidebar-item"><a href="<?= site_url('teacher/materials.php'); ?>"><i class="fas fa-file-upload"></i> Materials</a></li>
+            <li class="sidebar-item"><a href="<?= site_url('teacher/announcements.php'); ?>"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            <li class="sidebar-item"><a href="<?= site_url('teacher/students.php'); ?>"><i class="fas fa-users"></i> Students</a></li>
+            <li class="sidebar-item"><a href="<?= site_url('teacher/profile.php'); ?>"><i class="fas fa-user-cog"></i> Profile</a></li>
+            <li class="sidebar-item sidebar-item-divider">
+                <a href="<?= site_url('logout.php'); ?>" class="sidebar-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="dashboard-main">
+        <?php if ($dashboardError): ?>
+            <div class="alert alert-danger" role="alert"><?= e($dashboardError); ?></div>
+        <?php endif; ?>
+        <div class="dashboard-title-bar">
+            <div>
+                <h2>Welcome, Teacher!</h2>
+                <p class="page-subtitle">Manage your courses, curriculum modules, and review enrolled students.</p>
+            </div>
+            <a href="<?= site_url('teacher/create-course.php'); ?>" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Create Course
+            </a>
+        </div>
+
+        <div class="dashboard-grid-stats portal-stats-grid">
+            <div class="stat-box">
+                <div class="stat-box-title">My Courses</div>
+                <div class="stat-box-value"><?= count($myCourses); ?></div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-box-title">Students</div>
+                <div class="stat-box-value text-primary"><?= $totalStudents; ?></div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-box-title">Published</div>
+                <div class="stat-box-value text-success"><?= $publishedCount; ?></div>
+            </div>
+        </div>
+
+        <!-- MY COURSES SECTION (Section 13 Mockup) -->
+        <div style="margin-top: 2rem;">
+            <h3 class="section-heading section-heading--caps">
+                MY COURSES
+            </h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <?php if (empty($myCourses)): ?>
+                    <div class="dashboard-empty-state">
+                        <h4>No courses yet</h4>
+                        <p>Create your first course to start building your learning program.</p>
+                        <a href="<?= site_url('teacher/create-course.php'); ?>" class="btn btn-primary">Create your first course</a>
+                    </div>
+                <?php endif; ?>
+                <?php foreach ($myCourses as $c): ?>
+                    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+                        <div>
+                            <h4 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">
+                                <?= e($c['title']); ?>
+                            </h4>
+                            <p style="font-size: 0.95rem; color: #64748b; font-weight: 600; margin-bottom: 1.25rem;">
+                                <?= (int)($c['student_count'] ?? 0); ?> Students
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="<?= site_url('teacher/edit-course.php?id=' . $c['id']); ?>" class="btn btn-outline btn-block btn-sm">
+                                [Manage Course]
+                            </a>
+                            <a href="<?= site_url('teacher/modules.php?course_id=' . $c['id']); ?>" class="btn btn-primary btn-sm" title="Manage Lessons">
+                                <i class="fas fa-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </main>
+</div>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>

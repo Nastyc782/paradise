@@ -1,0 +1,28 @@
+# Local development access rules (XAMPP/Apache).
+# Mirrors docker/router.php so the app cannot leak source, config or data
+# when served by Apache instead of PHP's built-in server.
+# This file is for the local checkout only - do not rely on it in production.
+
+Options -Indexes
+DirectoryIndex index.php index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Never serve these folders over HTTP.
+    RewriteRule ^(config|includes|database|docker|docs|\.git|\.github)/ - [F,L]
+
+    # Never serve these files over HTTP.
+    RewriteRule ^(Dockerfile|docker-compose\.ya?ml|setup\.bat|\.env.*|railway\.json)$ - [F,L]
+</IfModule>
+
+# Never serve these file types.
+<FilesMatch "(?i)\.(sql|md|env|log|lock|sh|bat|yml|yaml|ini|bak|dist)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

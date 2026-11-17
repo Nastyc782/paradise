@@ -1,0 +1,91 @@
+<?php
+$footerCourses = [];
+if (!empty($db_connected) && !empty($pdo)) {
+    try {
+        $footerCourseStmt = $pdo->query("SELECT id, title FROM courses WHERE status = 'published' ORDER BY is_featured DESC, created_at DESC LIMIT 3");
+        $footerCourses = $footerCourseStmt->fetchAll();
+    } catch (PDOException $e) {
+        log_database_error('Load footer courses', $e);
+    }
+}
+?>
+</div> <!-- End of .main-content -->
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Digital Smart Class</h3>
+                <p class="footer-about">
+                    A professional academy in Kigali for creators who want practical YouTube, Shorts, and AI video skills.
+                </p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:<?= e(support_email()); ?>"><?= e(support_email()); ?></a></p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:<?= e(support_phone_tel()); ?>"><?= e(support_phone_display()); ?></a></p>
+                    <p><i class="fab fa-whatsapp"></i> <a href="<?= e(support_whatsapp_url('Hello Digital Smart Class support team, I need assistance.')); ?>" target="_blank" rel="noopener">WhatsApp Support</a></p>
+                </div>
+                <div class="social-row">
+                    <a href="<?= e(support_whatsapp_url('Hello Digital Smart Class support team, I need assistance.')); ?>" target="_blank" rel="noopener" aria-label="Chat with support on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Popular Courses</h5>
+                <ul class="footer-links">
+                    <?php if (empty($footerCourses)): ?>
+                        <li><span class="footer-muted">No published courses yet.</span></li>
+                    <?php else: foreach ($footerCourses as $footerCourse): ?>
+                        <li><a href="<?= site_url('course-details.php?id=' . (int)$footerCourse['id']); ?>"><?= e($footerCourse['title']); ?></a></li>
+                    <?php endforeach; endif; ?>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Learn With Us</h5>
+                <ul class="footer-links">
+                    <li><a href="<?= site_url('index.php'); ?>">Home</a></li>
+                    <li><a href="<?= site_url('courses.php'); ?>">Browse Courses</a></li>
+                    <li><a href="<?= site_url('register.php'); ?>">Enroll Now</a></li>
+                    <li><a href="<?= site_url('login.php'); ?>">Student Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Academy</h5>
+                <ul class="footer-links">
+                    <li><a href="<?= site_url('about.php'); ?>">About Us</a></li>
+                    <li><a href="<?= site_url('contact.php'); ?>">Contact & Support</a></li>
+                    <li><a href="<?= site_url('teacher/application.php'); ?>">Teach with us</a></li>
+                    <li><a href="<?= site_url('login.php'); ?>">Teacher sign in</a></li>
+                    <li><a href="<?= site_url('register.php'); ?>">Create Account</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                &copy; <?= date('Y'); ?> Digital Smart Class. All rights reserved.
+            </div>
+            <div>
+                Built for learners in Rwanda.
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Floating WhatsApp support launcher -->
+<a class="wa-support"
+   href="<?= e(support_whatsapp_url('Hello Digital Smart Class support team, I would like some help.')); ?>"
+   target="_blank" rel="noopener"
+   aria-label="Chat with our support team on WhatsApp">
+    <span class="wa-support-badge"><i class="fab fa-whatsapp" aria-hidden="true"></i></span>
+    <span class="wa-support-body">
+        <span class="wa-support-title">Need help?</span>
+        <span class="wa-support-sub">Chat with support</span>
+    </span>
+</a>
+
+<script src="<?= site_url('assets/js/main.js'); ?>"></script>
+</body>
+</html>

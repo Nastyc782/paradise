@@ -1,0 +1,24 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime-generated uploads and payment evidence
+uploads/payments/*
+!uploads/payments/.gitkeep
+uploads/profiles/*
+!uploads/profiles/.gitkeep
+uploads/teacher-documents/*
+!uploads/teacher-documents/.gitkeep
+uploads/documents/*
+!uploads/documents/.gitkeep
+uploads/presentations/*
+!uploads/presentations/.gitkeep
+uploads/videos/*
+!uploads/videos/.gitkeep
+uploads/courses/*
+!uploads/courses/.gitkeep
+
+# Local logs and editor metadata
+*.log
+.vscode/

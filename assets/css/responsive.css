@@ -1,0 +1,673 @@
+/* ============================================================
+   Digital Smart Class - Responsive Design Rules
+   ============================================================ */
+
+@media (max-width: 992px) {
+    .learning-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-promo-card {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 0.5rem;
+    }
+
+    .curriculum-sidebar {
+        max-height: 400px;
+    }
+
+    .dashboard-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .course-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .course-banner {
+        aspect-ratio: 16 / 9;
+    }
+
+    .course-details-review-form {
+        grid-template-columns: 1fr;
+    }
+
+    .course-details-review-form .btn {
+        width: 100%;
+    }
+
+    .payment-form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        height: auto;
+        padding: 0.9rem 0 1rem;
+        gap: 0.75rem;
+    }
+
+    .nav-links {
+        gap: 0.25rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 3.4rem 0 3rem;
+    }
+
+    .hero-title {
+        font-size: 2.1rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid,
+    .dashboard-grid-stats,
+    .portal-stats-grid,
+    .admin-dashboard-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .split-grid,
+    .learn-grid,
+    .why-grid,
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-main {
+        padding: 1.4rem 1rem;
+    }
+
+    .student-announcements {
+        padding: 1rem;
+    }
+
+    .student-announcements-header {
+        flex-direction: column;
+    }
+
+    .dashboard-promo-card,
+    .promo-banner-inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+        border-radius: 22px;
+    }
+
+    .teacher-application-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .teacher-application-form-wide {
+        grid-column: auto;
+    }
+
+    .teacher-application-submit {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .promo-banner {
+        padding: 1.5rem 0 0.25rem;
+    }
+
+    .promo-copy {
+        padding: 1.5rem;
+    }
+
+    .promo-copy h2 {
+        font-size: clamp(2rem, 8vw, 3.25rem);
+    }
+
+    .promo-copy p {
+        font-size: 0.95rem;
+    }
+
+    .promo-visual {
+        padding: 0 1rem 1rem;
+    }
+
+    .promo-visual img,
+    .dashboard-promo-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 14px;
+    }
+
+    .dashboard-promo-copy {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .dashboard-promo-copy h3 {
+        font-size: clamp(1.7rem, 7vw, 2.4rem);
+    }
+
+    .dashboard-promo-image {
+        padding: 0 0.5rem 0.5rem;
+    }
+
+    .promo-actions .btn,
+    .dashboard-promo-actions .btn {
+        min-height: 44px;
+    }
+}
+
+/* Dashboard polish at small sizes */
+@media (max-width: 900px) {
+    .dashboard-layout {
+        min-height: calc(100vh - 64px);
+    }
+
+    .dashboard-layout .sidebar {
+        background:
+            radial-gradient(circle at 50% -10%, rgba(41, 203, 226, 0.16), transparent 16rem),
+            linear-gradient(180deg, #0a1c2e 0%, #071426 100%);
+        border-right: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .dashboard-main::before {
+        top: 0.5rem;
+        right: -4rem;
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-title-bar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .dashboard-title-bar > .btn,
+    .dashboard-title-bar > a {
+        width: 100%;
+    }
+
+    .dashboard-main {
+        padding: 1.25rem 0.85rem 2rem;
+    }
+
+    .dashboard-grid-stats,
+    .stats-grid,
+    .portal-stats-grid,
+    .admin-dashboard-stats,
+    .admin-dashboard-secondary-stats {
+        gap: 0.75rem;
+    }
+
+    .stat-box,
+    .stat-card {
+        padding: 1.05rem;
+        border-radius: 17px;
+    }
+
+    .stat-box-value,
+    .stat-card-value {
+        font-size: 1.55rem;
+    }
+
+    .table-card,
+    .panel,
+    .learning-card {
+        border-radius: 18px;
+    }
+
+    .table-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive table {
+        min-width: 680px;
+    }
+
+    .dashboard-promo-card {
+        padding: 0.75rem;
+        border-radius: 21px;
+    }
+
+    .dashboard-promo-copy {
+        padding: 0.85rem 0.55rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-main {
+        padding-right: 0.65rem;
+        padding-left: 0.65rem;
+    }
+
+    .dashboard-title-bar h2 {
+        font-size: 1.4rem;
+    }
+
+    .stat-box-title,
+    .stat-card-title {
+        font-size: 0.62rem;
+    }
+
+    .student-recommended-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .student-recommended-footer .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-banner-inner,
+    .dashboard-promo-card {
+        border-radius: 18px;
+    }
+
+    .promo-copy {
+        padding: 1.25rem 1rem;
+    }
+
+    .promo-kicker {
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+    }
+
+    .promo-copy h2 {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+        letter-spacing: -0.045em;
+    }
+
+    .promo-actions,
+    .dashboard-promo-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .promo-actions .btn,
+    .dashboard-promo-actions .btn {
+        width: 100%;
+        white-space: normal;
+    }
+
+    .promo-visual {
+        padding: 0 0.65rem 0.65rem;
+    }
+
+    .stats-grid,
+    .dashboard-grid-stats,
+    .portal-stats-grid,
+    .admin-dashboard-stats,
+    .admin-dashboard-secondary-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .announcement-card-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+
+    .teacher-application-card-heading {
+        align-items: flex-start;
+    }
+
+    .teacher-application-status {
+        gap: 0.7rem;
+        padding: 1rem;
+    }
+
+    .teacher-application-status-icon {
+        flex-basis: 38px;
+        height: 38px;
+    }
+
+    .application-review-actions .btn {
+        flex: 1 1 100%;
+    }
+}
+
+
+/* ============================================================
+   Professional off-canvas navigation drawer
+   ============================================================ */
+@media (max-width: 900px) {
+    html,
+    body {
+        overflow-x: clip;
+    }
+
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    .nav-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: auto;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 0;
+        gap: 0.75rem;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+        margin-left: auto;
+        position: relative;
+        z-index: 320;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        height: 100dvh;
+        width: min(340px, 88vw);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        margin: 0;
+        padding: 1.1rem 1.15rem 1.5rem;
+        background: #ffffff;
+        border-left: 1px solid var(--gray-200);
+        box-shadow: -24px 0 60px -28px rgba(15, 23, 42, 0.55);
+        transform: translateX(105%);
+        transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: 300;
+        will-change: transform;
+    }
+
+    .nav-menu.is-open {
+        transform: translateX(0);
+    }
+
+    .nav-menu-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 0.9rem;
+        margin-bottom: 0.6rem;
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .nav-menu-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gray-500);
+    }
+
+    .nav-menu-title i {
+        color: var(--primary);
+        background: var(--primary-light);
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+    }
+
+    .nav-menu-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--gray-200);
+        border-radius: 11px;
+        background: var(--gray-50);
+        color: var(--gray-600);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .nav-menu-close:hover,
+    .nav-menu-close:focus-visible {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: var(--danger);
+        outline: none;
+    }
+
+    .nav-menu .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        gap: 0.25rem;
+        width: 100%;
+    }
+
+    .nav-menu .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        font-size: 0.97rem;
+        font-weight: 650;
+        color: var(--gray-700);
+        background: transparent;
+    }
+
+    .nav-menu .nav-link::after {
+        content: "\f054";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 0.7rem;
+        color: var(--gray-400);
+        opacity: 0.8;
+    }
+
+    .nav-menu .nav-link:hover,
+    .nav-menu .nav-link:focus-visible,
+    .nav-menu .nav-link.active {
+        background: var(--primary-light);
+        color: var(--primary);
+        outline: none;
+    }
+
+    .nav-menu .nav-link:hover::after,
+    .nav-menu .nav-link.active::after {
+        color: var(--primary);
+    }
+
+    .nav-menu .nav-actions {
+        flex-direction: column;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        gap: 0.6rem;
+        width: 100%;
+        margin-top: auto;
+        padding-top: 1.1rem;
+        border-top: 1px solid var(--gray-200);
+    }
+
+    .nav-menu .nav-actions .btn {
+        width: 100%;
+        flex: 0 0 auto;
+        justify-content: center;
+    }
+
+    .nav-menu .nav-actions .nav-icon-link {
+        width: 100%;
+        height: auto;
+        padding: 0.7rem 1rem;
+        justify-content: flex-start;
+        gap: 0.6rem;
+    }
+
+    .nav-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(7, 20, 39, 0.5);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 250;
+    }
+
+    body.nav-open .nav-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Dashboard sidebar becomes an off-canvas drawer opened by the hamburger */
+    .dashboard-layout .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        height: 100dvh;
+        width: min(300px, 86vw);
+        max-width: 86vw;
+        background:
+            radial-gradient(circle at 50% -10%, rgba(41, 203, 226, 0.16), transparent 16rem),
+            linear-gradient(180deg, #0a1c2e 0%, #071426 100%);
+        border-right: 1px solid rgba(148, 163, 184, 0.12);
+        border-bottom: none;
+        padding-top: 3.4rem;
+        box-shadow: 24px 0 60px -28px rgba(15, 23, 42, 0.55);
+        transform: translateX(-105%);
+        transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: 310;
+        will-change: transform;
+    }
+
+    .dashboard-layout .sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--gray-200);
+        border-radius: 11px;
+        background: var(--gray-50);
+        color: var(--gray-600);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .sidebar-close:hover,
+    .sidebar-close:focus-visible {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: var(--danger);
+        outline: none;
+    }
+
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(7, 20, 39, 0.5);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 305;
+    }
+
+    body.sidebar-open {
+        overflow: hidden;
+    }
+
+    body.sidebar-open .sidebar-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@media (min-width: 901px) {
+    .nav-menu-head,
+    .nav-menu-close,
+    .nav-overlay,
+    .sidebar-close,
+    .sidebar-overlay {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .notifications-heading,
+    .notification-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .notifications-heading-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .notifications-heading-actions form,
+    .notifications-heading-actions .btn {
+        width: 100%;
+    }
+
+    .notification-item {
+        position: relative;
+        padding: 1rem;
+    }
+
+    .notification-item-heading {
+        align-items: flex-start;
+    }
+
+    .notification-item-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}

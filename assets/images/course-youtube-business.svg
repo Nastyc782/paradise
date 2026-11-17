@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">YouTube Monetization and Online Business</title>
+  <desc id="desc">A creator business dashboard with revenue symbols.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#111827"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="170" y="150" width="660" height="360" rx="26" fill="#fff" opacity=".96"/>
+  <path d="M230 440l130-125 110 75 165-180 130 70" fill="none" stroke="#059669" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="930" cy="270" r="125" fill="#f59e0b"/><text x="884" y="320" fill="#fff" font-family="Arial,sans-serif" font-size="150" font-weight="700">$</text>
+  <text x="170" y="590" fill="#fff" font-family="Arial,sans-serif" font-size="46" font-weight="700">MONETIZE • BUILD • SCALE</text>
+</svg>
