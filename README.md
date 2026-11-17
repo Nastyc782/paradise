@@ -38,6 +38,22 @@ dsclass/
 3. Import `database/digital_smart_class.sql` (phpMyAdmin → Import).
 4. Edit `config/database.php` defaults — host, database name, user, password — or
    provide `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `DB_PORT` environment variables.
+   On InfinityFree, create `config/database.local.php` on the server (this file is
+   intentionally excluded from Git) with the following structure, using your
+   private database password:
+
+   ```php
+   <?php
+   return [
+       'DB_HOST' => 'sql102.infinityfree.com',
+       'DB_PORT' => '3306',
+       'DB_NAME' => 'if0_43352524_digital_smart_class',
+       'DB_USER' => 'if0_43352524',
+       'DB_PASS' => 'your-private-database-password',
+   ];
+   ```
+
+   Never commit the real password to GitHub.
 5. Make sure `uploads/` and its subfolders are writable by the web server
    (on Linux: `chmod -R 775 uploads`).
 6. Open `setup-admin.php` once in the browser to create the first administrator,

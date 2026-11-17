@@ -16,6 +16,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Environment-aware configuration. A server-only local override may provide
+// DB_HOST, DB_NAME, DB_USER, DB_PASS, and DB_PORT without entering Git.
+$localConfig = __DIR__ . '/database.local.php';
+if (is_file($localConfig)) {
+    $localSettings = require $localConfig;
+    if (is_array($localSettings)) {
+        foreach (['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS', 'DB_PORT'] as $setting) {
+            if (array_key_exists($setting, $localSettings)) {
+                putenv($setting . '=' . $localSettings[$setting]);
+            }
+        }
+    }
+}
+
 // Environment-aware configuration. Local XAMPP works with the defaults below.
 // Hosted platforms can inject explicit DB_* variables, or provide Railway's
 // MySQL plugin variables (MYSQLHOST/MYSQLPORT/MYSQLUSER/MYSQLPASSWORD/
